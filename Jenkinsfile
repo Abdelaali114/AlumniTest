@@ -8,7 +8,7 @@ pipeline {
         DOCKER_USERNAME = credentials('docker-username')  // Jenkins credentials for Docker Hub username
         DOCKER_PASSWORD = credentials('docker-password')  // Jenkins credentials for Docker Hub password
         MONGO_PASSWORD = credentials('mongo-password')    // MongoDB password for deployment
-        NODE_VERSION = '16.x'                            // Node.js version to use
+        NODE_VERSION = '20.x'                            // Node.js version to use
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
                 axes {
                     axis {
                         name 'NODE_VERSION'
-                        values '16.x'
+                        values '20.x'
                     }
                 }
                 stages {
