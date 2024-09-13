@@ -34,8 +34,8 @@ pipeline {
                             script {
                                 // Set up Node.js and install backend dependencies
                                 sh '''
-                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo -E bash -
-                                    sudo apt-get install -y nodejs
+                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x |  -E bash -
+                                    apt-get install -y nodejs
                                     cd server
                                     npm install
                                 '''
@@ -48,8 +48,8 @@ pipeline {
                             script {
                                 // Set up Node.js and install frontend dependencies
                                 sh '''
-                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | sudo -E bash -
-                                    sudo apt-get install -y nodejs
+                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x |  -E bash -
+                                     apt-get install -y nodejs
                                     cd client
                                     npm install
                                 '''
@@ -92,20 +92,20 @@ pipeline {
                 script {
                     // Deploy backend
                     sh '''
-                        sudo docker pull abdelaali2550/alumni-backend-test:latest
-                        sudo docker stop alumni-backend-test-container || true
-                        sudo docker rm alumni-backend-test-container || true
-                        sudo docker run -d -p 3001:3001 --name alumni-backend-test-container \
+                         docker pull abdelaali2550/alumni-backend-test:latest
+                         docker stop alumni-backend-test-container || true
+                         docker rm alumni-backend-test-container || true
+                         docker run -d -p 3001:3001 --name alumni-backend-test-container \
                         -e MONGO_PASSWORD='${MONGO_PASSWORD}' \
                         abdelaali2550/alumni-backend-test:latest
                     '''
 
                     // Deploy frontend
                     sh '''
-                        sudo docker pull abdelaali2550/alumni-frontend-test:latest
-                        sudo docker stop alumni-frontend-test-container || true
-                        sudo docker rm alumni-frontend-test-container || true
-                        sudo docker run -d -p 5173:80 --name alumni-frontend-test-container \
+                         docker pull abdelaali2550/alumni-frontend-test:latest
+                         docker stop alumni-frontend-test-container || true
+                         docker rm alumni-frontend-test-container || true
+                         docker run -d -p 5173:80 --name alumni-frontend-test-container \
                         abdelaali2550/alumni-frontend-test:latest
                     '''
                 }
