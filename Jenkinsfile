@@ -8,7 +8,7 @@ pipeline {
         DOCKER_USERNAME = credentials('docker-username')  // Jenkins credentials for Docker Hub username
         DOCKER_PASSWORD = credentials('docker-password')  // Jenkins credentials for Docker Hub password
         MONGO_PASSWORD = credentials('mongo-password')    // MongoDB password for deployment
-        NODE_VERSION = '20.x'                            // Node.js version to use
+        NODE_VERSION = '18.x'                            // Node.js version to use
     }
 
     stages {
@@ -25,7 +25,7 @@ pipeline {
                 axes {
                     axis {
                         name 'NODE_VERSION'
-                        values '20.x'
+                        values '18.x'
                     }
                 }
                 stages {
@@ -36,7 +36,7 @@ pipeline {
                                 sh '''
                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | bash -
                                    sudo apt-get install -y nodejs
-                                  
+                                   sudo apt-get install -y npm
                                    cd server
                                    npm install
                                 '''
@@ -51,7 +51,7 @@ pipeline {
                                 sh '''
                                     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | bash -
                                     sudo apt-get install -y nodejs
-                                    
+                                    sudo apt-get install -y npm
                                     cd client
                                     npm install
                                 '''
