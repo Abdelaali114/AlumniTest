@@ -35,7 +35,7 @@ pipeline {
                                 // Set up Node.js and install backend dependencies
                                 sh '''
                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | bash -
-                                   apt-get install -y nodejs
+                                   sudo apt-get install -y nodejs
                                    cd server
                                    npm install
                                 '''
@@ -49,7 +49,7 @@ pipeline {
                                 // Set up Node.js and install frontend dependencies
                                 sh '''
                                     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | bash -
-                                    apt-get install -y nodejs
+                                    sudo apt-get install -y nodejs
                                     cd client
                                     npm install
                                 '''
