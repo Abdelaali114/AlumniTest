@@ -34,10 +34,10 @@ pipeline {
                             script {
                                 // Set up Node.js and install backend dependencies
                                 sh '''
-                                    curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x |  -E bash -
-                                    apt-get install -y nodejs
-                                    cd server
-                                    npm install
+                                   curl -sL https://deb.nodesource.com/setup_${NODE_VERSION}.x | bash -
+                                   apt-get install -y nodejs
+                                   cd server
+                                   npm install
                                 '''
                             }
                         }
@@ -49,7 +49,7 @@ pipeline {
                                 // Set up Node.js and install frontend dependencies
                                 sh '''
                                     curl -sL https://deb.nodesource.com/setup_18.x | bash -
-                                     apt-get install -y nodejs
+                                    apt-get install -y nodejs
                                     cd client
                                     npm install
                                 '''
