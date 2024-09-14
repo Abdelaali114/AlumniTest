@@ -15,7 +15,8 @@ pipeline {
         stage('Checkout Code') {
             steps {
                 // Checkout repository code
-                checkout scm
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Abdelaali114/AlumniTest.git']])
+                
             }
         }
 
