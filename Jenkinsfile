@@ -30,22 +30,23 @@ pipeline {
                     }
                 }
                 stages {
+                    
                     stage('Install Backend Dependencies') {
                         steps {
                             script {
                                 // Set up Node.js and install backend dependencies
                                 sh '''
-                                   curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | sudo bash -
+                                   curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
                                    sudo apt-get install -y nodejs
-                                   sudo apt-get install -y npm
-                                   cd server
-                                   npm install
+                                   node --version
+                                   npm --version
+                                  
                                 '''
                             }
                         }
                     }
 
-                    stage('Install Frontend Dependencies') {
+                   /* stage('Install Frontend Dependencies') {
                         steps {
                             script {
                                 // Set up Node.js and install frontend dependencies
