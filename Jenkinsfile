@@ -46,7 +46,7 @@ pipeline {
                         }
                     }
 
-                   /* stage('Install Frontend Dependencies') {
+                     /*stage('Install Frontend Dependencies') {
                         steps {
                             script {
                                 // Set up Node.js and install frontend dependencies
@@ -63,7 +63,7 @@ pipeline {
                 }
             }
         }
-     /*
+    
         // 2. Build and push Docker images for both backend and frontend
         stage('Build and Push Docker Images') {
             steps {
