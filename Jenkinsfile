@@ -21,7 +21,7 @@ pipeline {
         }
 
         // 1. Test both server and client
-        /*stage('Test Backend and Frontend') {
+        stage('Test Backend and Frontend') {
             matrix {
                 axes {
                     axis {
@@ -62,7 +62,7 @@ pipeline {
                 }
             }
         }
-
+     /*
         // 2. Build and push Docker images for both backend and frontend
         stage('Build and Push Docker Images') {
             steps {
