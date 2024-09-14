@@ -40,20 +40,19 @@ pipeline {
                         }
                     }
 
-                   /* stage('Install Frontend Dependencies') {
+                   stage('Install Frontend Dependencies') {
                         steps {
                             script {
                                 // Set up Node.js and install frontend dependencies
                                 sh '''
                                     curl -sL https://deb.nodesource.com/setup_${NODE_VERSION} | sudo bash -
                                     sudo apt-get install -y nodejs
-                                    sudo apt-get install -y npm
                                     cd client
                                     npm install
                                 '''
                             }
                         }
-                    }*/
+                    }
                 }
             }
         }
