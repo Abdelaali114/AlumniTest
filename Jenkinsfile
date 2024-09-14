@@ -1,6 +1,3 @@
-
-
-
 pipeline {
     agent any
 
@@ -16,7 +13,6 @@ pipeline {
             steps {
                 // Checkout repository code
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Abdelaali114/AlumniTest.git']])
-                
             }
         }
 
@@ -30,7 +26,6 @@ pipeline {
                     }
                 }
                 stages {
-                    
                     stage('Install Backend Dependencies') {
                         steps {
                             script {
@@ -40,13 +35,12 @@ pipeline {
                                    sudo apt-get install -y nodejs
                                    node --version
                                    npm --version
-                                  
                                 '''
                             }
                         }
                     }
 
-                     /*stage('Install Frontend Dependencies') {
+                   /* stage('Install Frontend Dependencies') {
                         steps {
                             script {
                                 // Set up Node.js and install frontend dependencies
@@ -59,12 +53,12 @@ pipeline {
                                 '''
                             }
                         }
-                    }
+                    }*/
                 }
             }
         }
-    
-        // 2. Build and push Docker images for both backend and frontend
+
+        /*// 2. Build and push Docker images for both backend and frontend
         stage('Build and Push Docker Images') {
             steps {
                 script {
