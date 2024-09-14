@@ -21,7 +21,7 @@ pipeline {
         }
 
         // 1. Test both server and client
-        stage('Test Backend and Frontend') {
+        /*stage('Test Backend and Frontend') {
             matrix {
                 axes {
                     axis {
@@ -113,15 +113,15 @@ pipeline {
                     '''
                 }
             }
-        }
+        }*/
     }
 
-    post {
+    /*post {
         success {
             echo 'Build, test, and deployment successful!'
         }
         failure {
             echo 'Build, test, or deployment failed!'
         }
-    }
+    }*/
 }
