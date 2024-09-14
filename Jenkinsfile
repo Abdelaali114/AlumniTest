@@ -26,7 +26,7 @@ pipeline {
                     }
                 }
                 stages {
-                    stage('Install Backend Dependencies') {
+                   /* stage('Install Backend Dependencies') {
                         steps {
                             script {
                                 // Set up Node.js and install backend dependencies
@@ -38,7 +38,7 @@ pipeline {
                                 '''
                             }
                         }
-                    }
+                    }*/
 
                    stage('Install Frontend Dependencies') {
                         steps {
