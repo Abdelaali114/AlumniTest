@@ -1,26 +1,37 @@
-FROM node:alpine3.18 as build
-# Build App
+# Step 1: Build the frontend or backend app
+FROM node:14 AS build
+
+# Set the working directory
 WORKDIR /app
-COPY package.json .
+
+# Copy package.json and install dependencies
+COPY package.json package-lock.json ./
 RUN npm install
+
+# Copy the rest of the app files
 COPY . .
+
+# Build the app (for frontend, this usually means running 'npm run build')
 RUN npm run build
 
-# Serve with Nginx
-FROM nginx:1.23-alpine
-# Install nano editor
-RUN apk update && apk add nano
+# Step 2: Set up Nginx and copy the built app files to Nginx's default directory
+FROM nginx:alpine AS stage-1
 
-# Remove default Nginx website
-WORKDIR /usr/share/nginx/html
-RUN rm -rf *
+# Install Nginx (it is usually pre-installed in the nginx:alpine image, but you can ensure it's installed)
+RUN apk update && apk add nginx
 
-# Copy built app from the build stage
-COPY --from=build /app/dist .
+# Remove the default Nginx index.html to serve your own content
+RUN rm -rf /usr/share/nginx/html/*
 
-# Copy custom Nginx configurations
-COPY nginx.conf /etc/nginx/nginx.conf
-COPY conf.d/*.conf /etc/nginx/conf.d/
+# Copy the built application files from the previous stage
+COPY --from=build /app/dist /usr/share/nginx/html
 
+# Expose port 80 so the container can listen on this port
 EXPOSE 80
-ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
+
+# (Optional) Copy a custom nginx.conf if you have one
+# COPY nginx.conf /etc/nginx/nginx.conf
+
+# Start Nginx in the foreground to keep the container running
+CMD ["nginx", "-g", "daemon off;"]
+
