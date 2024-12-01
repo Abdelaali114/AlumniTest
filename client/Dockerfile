@@ -27,7 +27,7 @@ RUN rm -rf /usr/share/nginx/html/*
 COPY --from=build /app/dist /usr/share/nginx/html
 
 # Expose port 80 so the container can listen on this port
-EXPOSE 80
+EXPOSE 3000
 
 # (Optional) Copy a custom nginx.conf if you have one
 # COPY nginx.conf /etc/nginx/nginx.conf
