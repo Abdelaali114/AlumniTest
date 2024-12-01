@@ -22,7 +22,8 @@ RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the built application files from the previous stage
 COPY --from=build /app/dist /usr/share/nginx/html
-
+# Copy the custom nginx.conf to configure nginx
+COPY nginx.conf /etc/nginx/nginx.conf
 # Expose port 80 so the container can listen on this port
 EXPOSE 80
 
