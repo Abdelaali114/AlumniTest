@@ -11,8 +11,8 @@ RUN npm install
 # Copy the rest of the app files
 COPY . .
 
-# Build the app (adjust the build command as per your framework)
-RUN npm run build && ls -al /app/build
+# Build the app with increased memory
+RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build && ls -al /app/build
 
 # Step 2: Set up Nginx and copy the built app files to Nginx's default directory
 FROM nginx:alpine
