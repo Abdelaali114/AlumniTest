@@ -24,7 +24,7 @@ RUN apk update && apk add nginx
 RUN rm -rf /usr/share/nginx/html/*
 
 # Copy the built application files from the previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
+COPY --from=build /app/build /usr/share/nginx/html
 
 # Expose port 80 so the container can listen on this port
 EXPOSE 3000
