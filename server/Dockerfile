@@ -1,15 +1,28 @@
-FROM node:alpine3.18
+ #-------Stage 1 Start------
+ # Base Image
+ FROM node:21 AS Backend
 
-WORKDIR /app
+ #Setup Working Directory
+ WORKDIR /app
 
+ #Copy Code
+ COPY . .
 
-COPY . .
+ #Package Install
+ RUN npm i
 
+ #Test after code
+ #RUN npm run test
 
-RUN  npm install
+ #--------Stage 1 Complete-------
+ #--------Stage 2 Start---------
 
+ FROM node:21-slim
 
-EXPOSE 5555
+ WORKDIR /app
 
+ COPY --from=Backend /app .
 
-CMD [ "npm", "run", "start"  ]
+ COPY .env.sample .env
+
+ EXPOSE 3001
