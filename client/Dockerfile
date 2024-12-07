@@ -1,31 +1,30 @@
-# Step 1: Build the frontend or backend app
-FROM node:16 AS build
+ #-------Stage 1 Start------
+ # Base Image
+ FROM node:22 AS Frontend
 
-# Set the working directory
-WORKDIR /app
+ #Setup Working Directory
+ WORKDIR /app
 
-# Copy package.json and install dependencies
-COPY package.json package-lock.json ./
-RUN npm install
+ #Copy Code
+ COPY package*.json ./
 
-# Copy the rest of the app files
-COPY . .
+ #Package Install
+ RUN npm i
 
-# Build the app with increased memory
-RUN NODE_OPTIONS="--max-old-space-size=4096" npm run build && ls -al /app/dist
+ COPY . .
 
-# Step 2: Set up Nginx and copy the built app files to Nginx's default directory
-FROM nginx:alpine
+ #--------Stage 1 Complete-------
+ #--------Stage 2 Start---------
 
-# Remove the default Nginx index.html to serve your own content
-RUN rm -rf /usr/share/nginx/html/*
+ FROM node:22-slim
 
-# Copy the built application files from the previous stage
-COPY --from=build /app/dist /usr/share/nginx/html
-# Copy the custom nginx.conf to configure nginx
-COPY nginx.conf /etc/nginx/nginx.conf
-# Expose port 80 so the container can listen on this port
-EXPOSE 80
+ WORKDIR /app
 
-# Start Nginx in the foreground to keep the container running
-CMD ["nginx", "-g", "daemon off;"]
+ COPY --from=Frontend /app .
+
+ COPY .env.sample .env.local
+
+ EXPOSE 5173
+
+ CMD ["npm","run","dev","--","--host"]
+
